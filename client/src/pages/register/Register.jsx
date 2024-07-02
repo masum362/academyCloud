@@ -22,6 +22,35 @@ const Register = () => {
             updateUser(result.user, name, photoURL,).then(async (res) => {
                 console.log('user updated')
             })
+            LoginUser(email, password).then(res => {
+            console.log("user logged in successfully")
+            toast.success('Successfully looged in user', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            })
+            setTimeout(() => {
+                navigate(location.state ? location.state : "/");
+            }, 2000);
+        }).catch(err => {
+            toast.error(err.message, {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            })
+        })
         }).catch(err => {
             toast.success(err.message, {
                 position: "top-right",
@@ -96,7 +125,7 @@ const Register = () => {
 
                         </div>
                         {errors.password && <span className='text-red-500'>{errors.password?.message}</span>}
-                        <Button type={'submit'} >Register</Button>
+                    <Button type={'submit'} >Register</Button>
                     </form>
 
                     <div className='flex flex-col items-center justify-center gap-4 pb-6'>
